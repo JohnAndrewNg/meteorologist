@@ -1,0 +1,24 @@
+<h1>Restaurants!</h1>
+
+<p>Here are restaurants near <%= @street_address %>:</p>
+
+<dl>
+
+  <dt>Restaurant Name</dt>
+  <dd><%=  @restaurant_name.first %></dd>
+
+  <dt>Price Level</dt>
+  <dd><%= @price_level.first %></dd>
+
+  <dt>Rating</dt>
+  <dd><%= @rating.first %></dd>
+
+  <dt>Rough Address</dt>
+  <dd><%= @rough_address.first %></dd>
+
+  <dt>Lattitude</dt>
+  <dd><%= @address_lat.first %></dd>
+
+  <dt>Longitude</dt>
+  <dd><%= @address_lng.first %></h1>
+</dl>

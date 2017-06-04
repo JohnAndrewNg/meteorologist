@@ -1,24 +1,79 @@
+<!DOCTYPE html>
+
 <h1>Restaurants!</h1>
 
-<p>Here are restaurants near <%= @street_address %>:</p>
 
-<dl>
+
+<p>Here are restaurants near <%= @street_address %>:</p>
+<% @results.each do |result| %>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/street_to_restaurants/bookmark">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+
+      <!-- Label and input for caption -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name: <%= result["name"] %>
+        </label>
+        <input type="hidden" id="name" name="name" value="<%= result["name"] %>">
+      </div>
+
+      <div class="form-group">
+        Price level: <%= result["price_level"] %>
+        <input type="hidden" id="price_level" name="price_level" value="<%= result["price_level"] %>">
+      </div>
+
+      <div class="form-group">
+        Rating: <%= result["rating"] %>
+        <input type="hidden" id="rating" name="rating" value="<%= result["rating"] %>">
+
+        <div class="form-group">
+          <input type="text" id="latitude" name="latitude" value="<%= result["geometry"]["location"]["lat"] %>">
+          <input type="text" id="longitude" name="longitude" value="<%= result["geometry"]["location"]["lng"] %>">
+        </div>
+        <div class="form-group">
+          <input type="hidden" id="photo_reference" name="photo_reference" value="<%= result["photos"][0]["photo_reference"] %>">
+          <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=<%= result["photos"][0]["photo_reference"] %>&key=AIzaSyAuo4_mSeoT40F-4QAP8uyTvCdw8c7cbvU">
+        </div>
+        <div class="form-group">
+          <input type="hidden" id="placeid" name="placeid" value="<%= result["place_id"] %>">
+        </div>
+
+        <button class="btn btn-success">
+          Bookmark
+        </button>
+      </form>
+    </div>
+    <br>
+  </div>
+
+
+  <!--<dl>
 
   <dt>Restaurant Name</dt>
-  <dd><%=  @restaurant_name.first %></dd>
+  <dd><%=  result["name"] %></dd>
 
   <dt>Price Level</dt>
-  <dd><%= @price_level.first %></dd>
+  <dd><%= result["price_level"] %></dd>
 
   <dt>Rating</dt>
-  <dd><%= @rating.first %></dd>
+  <dd><%= result["rating"] %></dd>
 
   <dt>Rough Address</dt>
-  <dd><%= @rough_address.first %></dd>
+  <dd><%= result["vicinity"] %></dd>
 
-  <dt>Lattitude</dt>
-  <dd><%= @address_lat.first %></dd>
+  <dt>Photo Reference</dt>
+  <dd><%= result["photos"][0]["photo_reference"] %></dd>
 
-  <dt>Longitude</dt>
-  <dd><%= @address_lng.first %></h1>
+  <dt>Lattitude & Longitude</dt>
+  <dd><%= result["geometry"]["location"]["lat"] %>, <%= result["geometry"]["location"]["lng"] %></dd>
+
 </dl>
+
+-->
+<% end %>

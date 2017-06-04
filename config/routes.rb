@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   get("/street_to_restaurants/new", { :controller => "restaurants", :action => "street_to_restaurants_form" })
   get("/street_to_restaurants", { :controller => "restaurants", :action => "street_to_restaurants" })
 
+get("/street_to_restaurants/bookmark", { :controller => "restaurants", :action => "bookmark"})
+#get "/street_to_restaurants/bookmark", :controller => "restaurants", :action => "bookmark"
 
 end
